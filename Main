@@ -1,3 +1,127 @@
+
+
+//main
 public static void main(String[] args) {
 PERT pert = new PERT();
   pert.reader();
+  
+  //ProjectConstants
+  package com.company;
+
+public final class ProjectConstants {
+
+   // ---------*---------*---------*---------*---------*
+   // String Constants
+   public static final String SECTION_DIV = "\n=================================================================================";
+   public static final String DATA_DIV = "\n=========================================";
+
+   // Data
+   public static final String TYPE_ERR = "\n\tERROR DATA TYPE MISMATCH: ";
+   public static final String EXPECTED_INT = "Integer data expected.";
+   public static final String EXPECTED_DBL = "Double precision data expected.";
+   public static final String EXPECTED_BOOL = "Boolean data expected.";
+
+   // ---------*---------*---------*---------*---------*
+   // Integer Constants
+
+   public static final int INVALID = -1;
+   public static final int MAX_DATA_ITEMS = 5;
+   public static final int MAXCOLUMNS = 0;
+   public static final int MAXTASKS = 0;
+   public static final int MINDUR = 0;
+   public static final int MAXDUR = 0;
+   public static final int ColumnIds = 0;
+   public static final int TASK = 0;
+   public static final int TOPT = 1;
+   public static final int TPESS = 2;
+   public static final int TML = 3;
+   public static final int TPRED1 = 4;
+   public static final int TPRED2 = 5;
+   public static final int TPRED3 = 6;
+   public static final int TSUCC1 = 7;
+   public static final int TSUCC2 = 8;
+   public static final int TSUCC3 = 9;
+   public static final int TEXPECT = 10;
+   public static final int TESTART = 11;
+   public static final int TEFIN = 12;
+   public static final int TLSTART = 13;
+   public static final int TLFIN = 14;
+   public static final int TSLACK = 15;
+
+   // ---------*---------*---------*---------*---------*
+   // Boolean Constants
+
+   public static final boolean DBG = false;
+
+   // PRIVATE //
+
+   // ---------*---------*---------*---------*---------*---------*---------*---------*
+   // The caller references the constants using ProjectConstants.MAXDATA, or as MAXDATA.
+   // We prevent the caller should be prevented from constructing objects of
+   // this class, by declaring this private constructor.
+   //
+   private ProjectConstants() {
+       //this prevents even the native class from calling this constructor as well
+       throw new AssertionError();
+   }
+}
+//PERT
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import static com.company.ProjectConstants.*;
+
+public class PERT {
+   public static void main(String[] args) {
+         double[][] doubles = new double[MAXTASKS][MAXCOLUMNS];
+   }
+
+   public void reader () {
+
+       String fileName= "Positive2.csv";
+       File file= new File(fileName);
+
+       // this gives you a 2-dimensional array of strings
+       List<List<String>> lines = new ArrayList<>();
+       Scanner inputStream;
+
+       try{
+           inputStream = new Scanner(file);
+
+           while(inputStream.hasNext()){
+               String line= inputStream.next();
+               String[] values = line.split(",");
+               // this adds the currently parsed line to the 2-dimensional string array
+               lines.add(Arrays.asList(values));
+           }
+
+           inputStream.close();
+       }catch (FileNotFoundException e) {
+           e.printStackTrace();
+       }
+
+       // the following code lets you iterate through the 2-dimensional array
+       int lineNo = 1;
+       for(List<String> line: lines) {
+           int columnNo = 1;
+           for (String value: line) {
+               System.out.println("Line " + lineNo + " Column " + columnNo + ": " + value);
+               columnNo++;
+           }
+           lineNo++;
+       }
+
+
+
+
+
+
+
+   }
+
